@@ -1,6 +1,7 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauConfigServeur;
 import com.atoudeft.vue.PanneauPrincipal;
 
 import javax.swing.*;
@@ -55,7 +56,49 @@ public class EcouteurMenuPrincipal implements ActionListener {
                     }
                     break;
                 case "CONFIGURER":
-                    //TODO : compléter (question 1.3)
+                    String adresseServ = client.getAdrServeur();
+                    int portServ = client.getPortServeur();
+                    boolean configurationValide = false;
+
+                    while (!configurationValide) {
+                        //Créer un panneau de configuration avec les valeurs actuelles
+                        PanneauConfigServeur panneauConfig = new PanneauConfigServeur(adresseServ, portServ);
+
+                        //Afficher le panneau dans une boîte de dialogue
+                        int resultat = JOptionPane.showConfirmDialog(
+                                fenetre,
+                                panneauConfig,
+                                "Configuration serveur",
+                                JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+
+                        //Verifier si l'utilisateur a cliquer sur OK
+                        if (resultat == JOptionPane.OK_OPTION) {
+                            try {
+                                //Recuperer les nouvelles valeurs saisies
+                                String nouvelleAdresse = panneauConfig.getAdresseServeur();
+                                int nouveauPort = Integer.parseInt(panneauConfig.getPortServeur());
+
+                                //Fournir les nouvelles donnees au client
+                                client.setAdrServeur(nouvelleAdresse);
+                                client.setPortServeur(nouveauPort);
+
+                                configurationValide = true; //Pour sortir de la boucle
+                            } catch (NumberFormatException e) {
+                                //Afficher un message d'erreur si le port n'est pas un entier
+                                JOptionPane.showMessageDialog(
+                                        fenetre,
+                                        "Le numéro de port doit être un entier valide.",
+                                        "Erreur",
+                                        JOptionPane.ERROR_MESSAGE
+                                );
+                            }
+                        } else {
+                            // L'utilisateur a cliquer sur annuler, donc on sort de la boucle
+                            configurationValide = true;
+                        }
+                    }
                     break;
                 case "QUITTER":
                     if (client.isConnecte()) {
