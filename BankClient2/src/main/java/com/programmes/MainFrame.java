@@ -48,7 +48,7 @@ public class MainFrame extends JFrame implements Runnable, Observateur {
         client = new Client();
         client.ajouterObservateur(this);
         panneauPrincipal = new PanneauPrincipal(client);
-        ecouteurMenuPrincipal = new EcouteurMenuPrincipal(client, this);
+        ecouteurMenuPrincipal = new EcouteurMenuPrincipal(client, this, panneauPrincipal);
         gestionnaireEvenement = new GestionnaireEvenementClient2(client,panneauPrincipal);
 
         //Menus :
@@ -98,7 +98,15 @@ public class MainFrame extends JFrame implements Runnable, Observateur {
                 this.panneauPrincipal.setVisible(false);
                 panneauPrincipal.cacherPanneauCompteClient();
                 panneauPrincipal.montrerPanneauConnexion();
+                miDeconnecter.setEnabled(false);
+                miConnecter.setEnabled(true);
             }
+            if (client.isConnecte()) {
+                miConnecter.setEnabled(false);
+                miDeconnecter.setEnabled(true);
+            }
+
+
         }
     }
 }

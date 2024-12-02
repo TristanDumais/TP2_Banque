@@ -1,6 +1,7 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,10 +17,12 @@ import java.awt.event.ActionListener;
 public class EcouteurMenuPrincipal implements ActionListener {
     private Client client;
     private JFrame fenetre;
+    private PanneauPrincipal panneauPrincipal;
 
-    public EcouteurMenuPrincipal(Client client, JFrame fenetre) {
+    public EcouteurMenuPrincipal(Client client, JFrame fenetre, PanneauPrincipal panneauPrincipal) {
         this.client = client;
         this.fenetre = fenetre;
+        this.panneauPrincipal = panneauPrincipal;
     }
 
     @Override
@@ -39,6 +42,7 @@ public class EcouteurMenuPrincipal implements ActionListener {
                             break;
                         }
                     }
+
                     break;
                 case "DECONNECTER":
                     if (!client.isConnecte())

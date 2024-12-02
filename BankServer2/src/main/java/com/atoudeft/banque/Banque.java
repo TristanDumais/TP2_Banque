@@ -1,6 +1,6 @@
 package com.atoudeft.banque;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,16 +41,7 @@ public class Banque implements Serializable {
             return null;
     }
 
-    /**
-     * Vérifier qu'un compte-bancaire appartient bien au compte-client.
-     *
-     * @param numeroCompteBancaire numéro du compte-bancaire
-     * @param numeroCompteClient    numéro du compte-client
-     * @return  true si le compte-bancaire appartient au compte-client
-     */
-    public boolean appartientA(String numeroCompteBancaire, String numeroCompteClient) {
-        throw new NotImplementedException();
-    }
+
 
     /**
      * Effectue un dépot d'argent dans un compte-bancaire
