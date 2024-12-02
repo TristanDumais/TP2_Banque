@@ -17,7 +17,7 @@ public class PanneauConfigServeur extends JPanel {
         txtNumPort = new JTextField(String.valueOf(port));
 
         //Grid Layout
-        setLayout(new GridLayout(2, 2, 10, 10));
+        setLayout(new GridLayout(2, 2, 20, 10));
 
         //Ajouts etiquettes et champs de textes
         add(new JLabel("Adresse du serveur :"));

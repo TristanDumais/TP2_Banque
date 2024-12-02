@@ -125,6 +125,7 @@ public class Client extends Observable implements Lecteur {
     public String getAdrServeur() {
         return adrServeur;
     }
+
     public void setAdrServeur(String adrServeur) {
         this.adrServeur = adrServeur;
     }

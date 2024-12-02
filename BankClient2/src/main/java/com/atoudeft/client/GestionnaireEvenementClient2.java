@@ -12,6 +12,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
     private Client client;
     private PanneauPrincipal panneauPrincipal;
 
+
     /**
      * Construit un gestionnaire d'événements pour un client.
      *
@@ -80,13 +81,59 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     }
                     break;
                 /******************* SÉLECTION DE COMPTES *******************/
-                case "EPARGNE" :
+                case "EPARGNE":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"EPARGNE "+arg);
+                    if (arg.trim().startsWith("NO")) {
+                        //Afficher un message d'erreur si l'operation échoue
+                        JOptionPane.showMessageDialog(panneauPrincipal, "Erreur : Impossible de créer le compte épargne.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        //Recuperer le numero de compte et l'ajouter à la liste des comptes
+                        String numeroCompte = arg.substring(arg.indexOf("OK") + 2).trim();
+                        panneauPrincipal.ajouterCompte(numeroCompte);
+                        //Message succes
+                        JOptionPane.showMessageDialog(panneauPrincipal, "Compte épargne créé avec succès : " + numeroCompte, "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    }
                     break;
-                case "SELECT" :
+                case "SELECT":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(panneauPrincipal, "Erreur : Impossible de sélectionner le compte.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        try {
+                            //Separe la reponse du serveur en plusieurs parties (Status, Numero de compte, Solde)
+                            String[] parts = arg.split("\\s+"); // Divise par espaces
+
+                            if (parts.length == 3 && "OK".equals(parts[0])) {
+                                String numeroCompte = parts[1]; //Le numero de compte
+                                double solde = Double.parseDouble(parts[2]); //Le solde du compte
+
+                                // Mettre à jour le panneau des operations avec le nouveau solde
+                                panneauPrincipal.getPanneauOperationsCompte().getLblSolde().setText("Solde : "+ String.valueOf(parts[2]));
+
+                                // Afficher un message de confirmation
+                                JOptionPane.showMessageDialog(
+                                        panneauPrincipal,
+                                        "Compte sélectionné avec succès : " + numeroCompte + ". Solde : " + solde + " $",
+                                        "Succès",
+                                        JOptionPane.INFORMATION_MESSAGE
+                                );
+                            } else {
+                                JOptionPane.showMessageDialog(
+                                        panneauPrincipal,
+                                        "Réponse inattendue du serveur : " + arg,
+                                        "Erreur",
+                                        JOptionPane.ERROR_MESSAGE
+                                );
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(
+                                    panneauPrincipal,
+                                    "Erreur lors de la récupération du solde : " + arg,
+                                    "Erreur",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
                     break;
 
                 /******************* OPÉRATIONS BANCAIRES *******************/

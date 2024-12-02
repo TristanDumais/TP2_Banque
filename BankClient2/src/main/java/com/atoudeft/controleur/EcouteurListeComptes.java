@@ -15,12 +15,25 @@ import java.awt.event.MouseEvent;
 public class EcouteurListeComptes extends MouseAdapter {
 
     private Client client;
+
     public EcouteurListeComptes(Client client) {
         this.client = client;
     }
 
     @Override
     public void mouseClicked(MouseEvent evt) {
-        //à compléter
+        if (evt.getClickCount() == 2) {
+
+            JList<String> list = (JList<String>) evt.getSource();
+            int index = list.locationToIndex(evt.getPoint());
+            String compte = list.getModel().getElementAt(index); //Recupere le compte selectionne
+            System.out.println("Double-clic détecté sur : " + compte);
+            //Verifie si le compte est de type cheque, afin de faire la commande SELECT approprier. Sinon, c'est de type epargne
+            if (compte.matches(".*\\[CHEQUE\\].*")){
+                client.envoyer("SELECT cheque");
+            } else {
+                client.envoyer("SELECT epargne");
+            }
+        }
     }
 }
