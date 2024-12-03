@@ -39,52 +39,64 @@ public class EcouteurOperationsCompte implements ActionListener {
                     client.envoyer("DEPOT" + " " + panneauPrincipal.getPanneauDynamique(action).getMontant());
                     panneauPrincipal.getPanneauDynamique(action).cleartxt();  //Reset le montant qui est dans la boite de dialogue
                     panneauPrincipal.cacherPanneauDynamique();
+
+                    panneauPrincipal.getPanneauOperationsCompte()
+                            .getLblSolde()
+                            .setText("Solde : Mise à jour en attente...");
                 }
 
                 break;
             case "RETRAIT":
-                //Si la case est vide, sa veut dire qu'on vient de faire apparaitre le panneau
+                //Meme logique
                 if (panneauPrincipal.getPanneauDynamique(action).getMontant().isEmpty()) {
                     for (String s : actions) {
-                        panneauPrincipal.getPanneauDynamique(s).cleartxt(); //Si on change d'operation alors qu'on avais un nombre deja ecris dans un autre text field, il faut reset pour eviter des bugs
+                        panneauPrincipal.getPanneauDynamique(s).cleartxt(); //Meme logique
                     }
                         panneauPrincipal.afficherPanneauDynamique(action);
                 }
-                //Si la case n'est pas vide, alors nous avons mis un montant a deposer, et nous allons l'envoyer au serveur
+                //Meme logique
                 else {
                     client.envoyer("RETRAIT" + " " + panneauPrincipal.getPanneauDynamique(action).getMontant());
-                    panneauPrincipal.getPanneauDynamique(action).cleartxt();  //Reset le montant qui est dans la boite de dialogue
+                    panneauPrincipal.getPanneauDynamique(action).cleartxt();  //Meme logique
                     panneauPrincipal.cacherPanneauDynamique();
+
+                    panneauPrincipal.getPanneauOperationsCompte()
+                            .getLblSolde()
+                            .setText("Solde : Mise à jour en attente...");
                 }
                 break;
             case "TRANSFER":
-                //Si la case est vide, sa veut dire qu'on vient de faire apparaitre le panneau
                 if (panneauPrincipal.getPanneauDynamique(action).getMontant().isEmpty()) {
                     for (String s : actions) {
-                        panneauPrincipal.getPanneauDynamique(s).cleartxt(); //Si on change d'operation alors qu'on avais un nombre deja ecris dans un autre text field, il faut reset pour eviter des bugs
+                        panneauPrincipal.getPanneauDynamique(s).cleartxt();
                     }
                     panneauPrincipal.afficherPanneauDynamique(action);
                 }
-                //Si la case n'est pas vide, alors nous avons mis un montant a transferer, et nous allons l'envoyer au serveur
+
                 else {
                     client.envoyer("TRANSFER" + " " + panneauPrincipal.getPanneauDynamique(action).getMontant() + " " + panneauPrincipal.getPanneauDynamique(action).getTransNum());
-                    panneauPrincipal.getPanneauDynamique(action).cleartxt();  //Reset le montant qui est dans la boite de dialogue
+                    panneauPrincipal.getPanneauDynamique(action).cleartxt();
                     panneauPrincipal.cacherPanneauDynamique();
+
+                    panneauPrincipal.getPanneauOperationsCompte()
+                            .getLblSolde()
+                            .setText("Solde : Mise à jour en attente...");
                 }
                 break;
             case "FACTURE":
-                //Si la case est vide, sa veut dire qu'on vient de faire apparaitre le panneau
                 if (panneauPrincipal.getPanneauDynamique(action).getMontant().isEmpty()) {
                     for (String s : actions) {
-                        panneauPrincipal.getPanneauDynamique(s).cleartxt(); //Si on change d'operation alors qu'on avais un nombre deja ecris dans un autre text field, il faut reset pour eviter des bugs
-                    }
+                        panneauPrincipal.getPanneauDynamique(s).cleartxt();                     }
                     panneauPrincipal.afficherPanneauDynamique(action);
                 }
-                //Si la case n'est pas vide, alors nous avons mis un montant a payer, et nous allons l'envoyer au serveur
                 else {
                     client.envoyer("FACTURE" + " " + panneauPrincipal.getPanneauDynamique(action).getMontant() + " " + panneauPrincipal.getPanneauDynamique(action).getFacNum() + " " + panneauPrincipal.getPanneauDynamique(action).getFacDesc());
-                    panneauPrincipal.getPanneauDynamique(action).cleartxt();  //Reset le montant qui est dans la boite de dialogue
+                    panneauPrincipal.getPanneauDynamique(action).cleartxt();
                     panneauPrincipal.cacherPanneauDynamique();
+
+                    panneauPrincipal.getPanneauOperationsCompte()
+                            .getLblSolde()
+                            .setText("Solde : Mise à jour en attente...");
                 }
                 break;
             default:

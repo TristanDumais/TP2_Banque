@@ -140,18 +140,94 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 case "DEPOT" :
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal,"DEPOT "+arg);
+                    try {
+                        // Vérifier que la réponse commence par "OK"
+                        if (arg.startsWith("OK")) {
+                            // Extraire la partie après "OK" et convertir en double
+                            String soldeStr = arg.substring(2).trim(); // Enlève "OK" et les espaces
+                            double nouveauSolde = Double.parseDouble(soldeStr);
+
+                            // Mettre à jour le solde dans le panneau des opérations
+                            panneauPrincipal.getPanneauOperationsCompte()
+                                    .getLblSolde()
+                                    .setText("Solde : " + nouveauSolde + " $");
+                        } else {
+                            // Gestion d'une réponse inattendue
+                            System.err.println("Réponse inattendue du serveur : " + arg);
+                        }
+                    } catch (NumberFormatException ex) {
+                        // Gérer les erreurs de conversion
+                        System.err.println("Erreur lors de la mise à jour du solde : " + arg);
+                    }
                     break;
                 case "RETRAIT" :
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal,"RETRAIT "+arg);
+                    try {
+                        // Vérifier que la réponse commence par "OK"
+                        if (arg.startsWith("OK")) {
+                            // Extraire la partie après "OK" et convertir en double
+                            String soldeStr = arg.substring(2).trim(); // Enlève "OK" et les espaces
+                            double nouveauSolde = Double.parseDouble(soldeStr);
+
+                            // Mettre à jour le solde dans le panneau des opérations
+                            panneauPrincipal.getPanneauOperationsCompte()
+                                    .getLblSolde()
+                                    .setText("Solde : " + nouveauSolde + " $");
+                        } else {
+                            // Gestion d'une réponse inattendue
+                            System.err.println("Réponse inattendue du serveur : " + arg);
+                        }
+                    } catch (NumberFormatException ex) {
+                        // Gérer les erreurs de conversion
+                        System.err.println("Erreur lors de la mise à jour du solde : " + arg);
+                    }
                     break;
                 case "FACTURE" :
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal,"FACTURE" + arg);
+                    try {
+                        // Vérifier que la réponse commence par "OK"
+                        if (arg.startsWith("OK")) {
+                            // Extraire la partie après "OK" et convertir en double
+                            String soldeStr = arg.substring(2).trim(); // Enlève "OK" et les espaces
+                            double nouveauSolde = Double.parseDouble(soldeStr);
+
+                            // Mettre à jour le solde dans le panneau des opérations
+                            panneauPrincipal.getPanneauOperationsCompte()
+                                    .getLblSolde()
+                                    .setText("Solde : " + nouveauSolde + " $");
+                        } else {
+                            // Gestion d'une réponse inattendue
+                            System.err.println("Réponse inattendue du serveur : " + arg);
+                        }
+                    } catch (NumberFormatException ex) {
+                        // Gérer les erreurs de conversion
+                        System.err.println("Erreur lors de la mise à jour du solde : " + arg);
+                    }
                     break;
                 case "TRANSFER" :
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal,"TRANSFER " + arg);
+                    try {
+                        // Vérifier que la réponse commence par "OK"
+                        if (arg.startsWith("OK")) {
+                            // Extraire la partie après "OK" et convertir en double
+                            String soldeStr = arg.substring(2).trim(); // Enlève "OK" et les espaces
+                            double nouveauSolde = Double.parseDouble(soldeStr);
+
+                            // Mettre à jour le solde dans le panneau des opérations
+                            panneauPrincipal.getPanneauOperationsCompte()
+                                    .getLblSolde()
+                                    .setText("Solde : " + nouveauSolde + " $");
+                        } else {
+                            // Gestion d'une réponse inattendue
+                            System.err.println("Réponse inattendue du serveur : " + arg);
+                        }
+                    } catch (NumberFormatException ex) {
+                        // Gérer les erreurs de conversion
+                        System.err.println("Erreur lors de la mise à jour du solde : " + arg);
+                    }
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default:
