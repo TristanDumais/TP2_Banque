@@ -27,7 +27,6 @@ public class EcouteurListeComptes extends MouseAdapter {
             JList<String> list = (JList<String>) evt.getSource();
             int index = list.locationToIndex(evt.getPoint());
             String compte = list.getModel().getElementAt(index); //Recupere le compte selectionne
-            System.out.println("Double-clic détecté sur : " + compte);
             //Verifie si le compte est de type cheque, afin de faire la commande SELECT approprier. Sinon, c'est de type epargne
             if (compte.matches(".*\\[CHEQUE\\].*")){
                 client.envoyer("SELECT cheque");
