@@ -24,7 +24,7 @@ public class PanneauOperationsCompte extends JPanel {
         bFacture.setActionCommand("FACTURE");
         bHistorique.setActionCommand("HIST");
 
-        //à compléter :
+
         this.setLayout(new FlowLayout(FlowLayout.RIGHT));
         this.add(lblSolde);
         this.add(bEpargne);

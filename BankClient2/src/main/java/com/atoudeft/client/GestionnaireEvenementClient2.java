@@ -3,6 +3,7 @@ package com.atoudeft.client;
 import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
+import com.atoudeft.vue.AfficheurHistorique;
 import com.atoudeft.vue.PanneauPrincipal;
 import com.programmes.MainFrame;
 
@@ -78,6 +79,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         for (String s:t) {
                             panneauPrincipal.ajouterCompte(s.substring(0,s.indexOf("]")+1));
                         }
+
                     }
                     break;
                 /******************* SÉLECTION DE COMPTES *******************/
@@ -227,6 +229,20 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     } catch (NumberFormatException ex) {
                         // Gérer les erreurs de conversion
                         System.err.println("Erreur lors de la mise à jour du solde : " + arg);
+                    }
+                    break;
+                case "HIST":
+                    arg = evenement.getArgument();
+                        if (arg.trim().isEmpty()) {
+                            JOptionPane.showMessageDialog(
+                                    panneauPrincipal,
+                                    "Aucun historique disponible.",
+                                    "Historique",
+                                    JOptionPane.INFORMATION_MESSAGE
+                            );
+                    } else {
+                        // Utiliser la classe AfficheurHistorique pour afficher l'historique
+                        new AfficheurHistorique().afficher(arg, "Historique des opérations");
                     }
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/

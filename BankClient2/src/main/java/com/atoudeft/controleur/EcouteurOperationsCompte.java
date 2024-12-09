@@ -99,6 +99,10 @@ public class EcouteurOperationsCompte implements ActionListener {
                             .setText("Solde : Mise à jour en attente...");
                 }
                 break;
+            case "HIST":
+                //Envoyer une requete pour récupérer l'historique
+                client.envoyer("HIST");
+                break;
             default:
                 System.out.println("Erreur???");
         }
